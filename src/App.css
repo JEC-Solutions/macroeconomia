@@ -1,0 +1,122 @@
+.app-main {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Columna mapa (desktop) */
+.map-column {
+  flex: 2 1 0;
+  min-width: 0;
+}
+
+/* Columna panel (desktop) */
+.panel-column {
+  flex: 1 1 0;
+  min-width: 320px;
+  max-width: 520px;
+  padding: 16px;
+  overflow-y: auto;
+  border-left: 1px solid #f0f0f0;
+  background: #fafafa;
+}
+
+/* Grid de productos */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+/* Tarjeta de producto */
+.product-card {
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  padding: 10px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 240px;
+}
+
+/* Contenedor de imagen */
+.product-image-wrapper {
+  flex-grow: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+/* Imagen protagonista */
+.product-image {
+  width: 100%;
+  height: 100%;
+  max-height: 210px;
+  object-fit: cover;
+  display: block;
+}
+
+.product-text {
+  text-align: center;
+}
+
+/* ----------------- RESPONSIVE ----------------- */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 992px) {
+  .panel-column {
+    max-width: 100%;
+  }
+}
+
+/* Móvil: apilar mapa arriba y panel abajo */
+@media (max-width: 768px) {
+  .app-main {
+    flex-direction: column;
+  }
+
+  .map-column {
+    flex: 0 0 auto;
+    height: 40vh; /* Mapa ocupa parte de la pantalla */
+  }
+
+  .panel-column {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    border-left: none;
+    border-top: 1px solid #f0f0f0;
+    padding: 12px;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+
+  .product-card {
+    min-height: 210px;
+  }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 480px) {
+  .map-column {
+    height: 35vh;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr; /* Una columna */
+  }
+
+  .product-card {
+    min-height: 200px;
+  }
+}
+
+

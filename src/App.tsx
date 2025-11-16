@@ -27,6 +27,7 @@ import {
 } from "recharts";
 import data from "./data/info_fronteras.json";
 import { motion } from "framer-motion";
+import "./App.css";
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
@@ -536,15 +537,18 @@ const CountrySummary = ({ selectedRow }: CountrySummaryProps) => {
         {selectedRow.exportaciones_millones || "Sin dato"}
       </Descriptions.Item>
       <Descriptions.Item label="Saldo comercial (texto)">
-        <Space>
-          {selectedRow.saldo_comercial_millones || "Sin dato"}
-          {selectedRow.saldo_comercial_millones
-            ?.toLowerCase()
-            .includes("superávit") && <Tag color="green">Superávit</Tag>}
-          {selectedRow.saldo_comercial_millones
-            ?.toLowerCase()
-            .includes("déficit") && <Tag color="red">Déficit</Tag>}
-        </Space>
+        <div className="saldo-row">
+          <span className="saldo-text">
+            {selectedRow.saldo_comercial_millones || "Sin dato"} {" "}
+            {selectedRow.saldo_comercial_millones
+              ?.toLowerCase()
+              .includes("superávit") && <Tag color="green">Superávit</Tag>}
+
+            {selectedRow.saldo_comercial_millones
+              ?.toLowerCase()
+              .includes("déficit") && <Tag color="red">Déficit</Tag>}
+          </span>
+        </div>
       </Descriptions.Item>
 
       {selectedRow.productos_exporta && (
@@ -698,13 +702,7 @@ const ProductsTab = ({
     }
 
     return (
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
-          gap: 16,
-        }}
-      >
+      <div className="products-grid">
         {items.map((p, index) => (
           <motion.div
             key={p.id}
@@ -716,47 +714,17 @@ const ProductsTab = ({
               boxShadow: "0 8px 24px rgba(0,0,0,0.18)",
             }}
             whileTap={{ scale: 0.98 }}
-            style={{
-              border: "1px solid #f0f0f0",
-              borderRadius: 12,
-              padding: 10,
-              background: "#fff",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "stretch",
-              minHeight: 240,
-            }}
+            className="product-card"
           >
-            {/* Contenedor de imagen: protagonista total */}
             <motion.div
-              style={{
-                flexGrow: 1,
-                borderRadius: 10,
-                overflow: "hidden",
-                background: "#fafafa",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginBottom: 8,
-              }}
+              className="product-image-wrapper"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.25 }}
             >
-              <img
-                src={p.imageUrl}
-                alt={p.name}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  maxHeight: 210,
-                  objectFit: "cover",
-                  display: "block",
-                }}
-              />
+              <img src={p.imageUrl} alt={p.name} className="product-image" />
             </motion.div>
 
-            {/* Texto pequeñito debajo */}
-            <div style={{ textAlign: "center" }}>
+            <div className="product-text">
               <Text style={{ fontSize: 13, fontWeight: 500 }}>{p.name}</Text>
             </div>
           </motion.div>
@@ -864,7 +832,6 @@ const CountryPanel = ({
 
   return (
     <Card
-      bordered
       title={
         <Space align="center">
           <img
@@ -888,7 +855,6 @@ const CountryPanel = ({
         </Text>
       )}
 
-      {/* Selector de año común a todas las tabs */}
       <YearSelector
         years={years}
         selectedYear={selectedYear}
@@ -906,16 +872,13 @@ export const App = () => {
   const [selectedCountryKey, setSelectedCountryKey] =
     useState<CountryKey>("colombia_ecuador");
 
-  // Datos del país seleccionado
   const countryData: TradeRow[] = rootData[selectedCountryKey];
 
-  // Año seleccionado (por defecto, último año de colombia_ecuador)
   const [selectedYear, setSelectedYear] = useState<number | null>(() => {
     const initialRows = rootData["colombia_ecuador"];
     return initialRows.length ? initialRows[initialRows.length - 1].año : null;
   });
 
-  // Fila correspondiente al año seleccionado
   const selectedRow: TradeRow | undefined =
     selectedYear == null
       ? undefined
@@ -939,33 +902,21 @@ export const App = () => {
 
   const config = COUNTRY_CONFIG[selectedCountryKey];
 
-  // Listado de años y datos para gráficos
   const years = countryData.map((row) => row.año);
   const chartData = buildChartData(countryData);
 
   return (
     <Layout style={{ height: "100vh" }}>
       <Content>
-        <div style={{ display: "flex", height: "100%", minHeight: 0 }}>
-          {/* MAPA (SIEMPRE VISIBLE) */}
-          <div style={{ flex: "2 1 0", minWidth: 0 }}>
+        <div className="app-main">
+          <div className="map-column">
             <CountryMap
               selectedCountryKey={selectedCountryKey}
               onCountryClick={handleCountryClick}
             />
           </div>
 
-          {/* PANEL DE INFORMACIÓN (Ant Design) */}
-          <div
-            style={{
-              flex: "1 1 0",
-              minWidth: 320,
-              maxWidth: 520,
-              padding: 16,
-              overflowY: "auto",
-              borderLeft: "1px solid #f0f0f0",
-            }}
-          >
+          <div className="panel-column">
             <CountryPanel
               config={config}
               years={years}
