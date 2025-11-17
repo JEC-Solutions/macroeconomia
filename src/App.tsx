@@ -27,6 +27,7 @@ import {
 } from "recharts";
 import data from "./data/info_fronteras.json";
 import { motion } from "framer-motion";
+import { PRODUCT_IMAGES } from "./data/products.images";
 import "./App.css";
 
 const { Content } = Layout;
@@ -159,288 +160,6 @@ function buildChartData(rows: TradeRow[]): ChartPoint[] {
     });
 }
 
-/* ---------------- CONFIG DE IMÁGENES DE PRODUCTOS ---------------- */
-
-interface ProductImage {
-  id: string;
-  name: string;
-  imageUrl: string;
-}
-
-const PRODUCT_IMAGES: Record<
-  CountryKey,
-  Partial<
-    Record<
-      number,
-      {
-        imports: ProductImage[];
-        exports: ProductImage[];
-      }
-    >
-  >
-> = {
-  colombia_ecuador: {
-    2014: {
-      imports: [
-        {
-          id: "vehiculo",
-          name: "Vehículos distintos del material rodante ferroviario o tranviario, y sus partes y accesorios.",
-          imageUrl: "/images/vehiculo.jpg",
-        },
-        {
-          id: "marisco",
-          name: "Preparaciones de carne, de pescado, de crustáceos, moluscos u otros invertebrados acuáticos, o…",
-          imageUrl: "/images/mariscos.avif",
-        },
-        {
-          id: "aceite",
-          name: "Grasas y aceites animales, vegetales o microbianos y sus productos de degradación; grasas comestibles preparadas",
-          imageUrl: "/images/aceites.jpg",
-        },
-      ],
-      exports: [
-        {
-          id: "vehiculo",
-          name: "Vehículos distintos del material rodante ferroviario o tranviario, y sus partes y accesorios.",
-          imageUrl: "/images/vehiculo.jpg",
-        },
-        {
-          id: "plastico",
-          name: "Plásticos y sus manufacturas.",
-          imageUrl: "/images/plasticos.jpg",
-        },
-        {
-          id: "farmaceutico",
-          name: "Productos farmaceuticos",
-          imageUrl: "/images/farmaceuticos.jpg",
-        },
-      ],
-    },
-    2015: {
-      imports: [],
-      exports: [
-        {
-          id: "vehiculo",
-          name: "Vehículos distintos del material rodante ferroviario o tranviario, y sus partes y accesorios.",
-          imageUrl: "/images/vehiculo.jpg",
-        },
-        {
-          id: "plastico",
-          name: "Plásticos y sus manufacturas.",
-          imageUrl: "/images/plasticos.jpg",
-        },
-        {
-          id: "farmaceutico",
-          name: "Productos farmaceuticos",
-          imageUrl: "/images/farmaceuticos.jpg",
-        },
-      ],
-    },
-    2016: {
-      imports: [],
-      exports: [
-        {
-          id: "vehiculo",
-          name: "Vehículos distintos del material rodante ferroviario o tranviario, y sus partes y accesorios.",
-          imageUrl: "/images/vehiculo.jpg",
-        },
-        {
-          id: "plastico",
-          name: "Plásticos y sus manufacturas.",
-          imageUrl: "/images/plasticos.jpg",
-        },
-        {
-          id: "farmaceutico",
-          name: "Productos farmaceuticos",
-          imageUrl: "/images/farmaceuticos.jpg",
-        },
-      ],
-    },
-    2017: {
-      imports: [],
-      exports: [
-        {
-          id: "vehiculo",
-          name: "Vehículos distintos del material rodante ferroviario o tranviario, y sus partes y accesorios.",
-          imageUrl: "/images/vehiculo.jpg",
-        },
-        {
-          id: "plastico",
-          name: "Plásticos y sus manufacturas.",
-          imageUrl: "/images/plasticos.jpg",
-        },
-        {
-          id: "farmaceutico",
-          name: "Productos farmaceuticos",
-          imageUrl: "/images/farmaceuticos.jpg",
-        },
-      ],
-    },
-    2018: {
-      imports: [],
-      exports: [
-        {
-          id: "vehiculo",
-          name: "Vehículos distintos del material rodante ferroviario o tranviario, y sus partes y accesorios.",
-          imageUrl: "/images/vehiculo.jpg",
-        },
-        {
-          id: "mineral",
-          name: "Combustibles minerales, aceites minerales y productos de su destilación; sustancias bituminosas; minerales...",
-          imageUrl: "/images/combustible_mineral.avif",
-        },
-        {
-          id: "plastico",
-          name: "Plásticos y sus manufacturas.",
-          imageUrl: "/images/plasticos.jpg",
-        },
-      ],
-    },
-    2019: {
-      imports: [],
-      exports: [
-        {
-          id: "vehiculo",
-          name: "Vehículos distintos del material rodante ferroviario o tranviario, y sus partes y accesorios.",
-          imageUrl: "/images/vehiculo.jpg",
-        },
-        {
-          id: "mineral",
-          name: "Combustibles minerales, aceites minerales y productos de su destilación; sustancias bituminosas; minerales...",
-          imageUrl: "/images/combustible_mineral.avif",
-        },
-        {
-          id: "plastico",
-          name: "Plásticos y sus manufacturas.",
-          imageUrl: "/images/plasticos.jpg",
-        },
-      ],
-    },
-    2020: {
-      imports: [],
-      exports: [
-        {
-          id: "mineral",
-          name: "Combustibles minerales, aceites minerales y productos de su destilación; sustancias bituminosas; minerales...",
-          imageUrl: "/images/combustible_mineral.avif",
-        },
-        {
-          id: "vehiculo",
-          name: "Vehículos distintos del material rodante ferroviario o tranviario, y sus partes y accesorios.",
-          imageUrl: "/images/vehiculo.jpg",
-        },
-        {
-          id: "plastico",
-          name: "Plásticos y sus manufacturas.",
-          imageUrl: "/images/plasticos.jpg",
-        },
-      ],
-    },
-    2021: {
-      imports: [],
-      exports: [
-        {
-          id: "vehiculo",
-          name: "Vehículos distintos del material rodante ferroviario o tranviario, y sus partes y accesorios.",
-          imageUrl: "/images/vehiculo.jpg",
-        },
-        {
-          id: "plastico",
-          name: "Plásticos y sus manufacturas.",
-          imageUrl: "/images/plasticos.jpg",
-        },
-        {
-          id: "mineral",
-          name: "Combustibles minerales, aceites minerales y productos de su destilación; sustancias bituminosas; minerales...",
-          imageUrl: "/images/combustible_mineral.avif",
-        },
-      ],
-    },
-    2022: {
-      imports: [],
-      exports: [
-        {
-          id: "vehiculo",
-          name: "Vehículos distintos del material rodante ferroviario o tranviario, y sus partes y accesorios.",
-          imageUrl: "/images/vehiculo.jpg",
-        },
-        {
-          id: "plastico",
-          name: "Plásticos y sus manufacturas.",
-          imageUrl: "/images/plasticos.jpg",
-        },
-        {
-          id: "farmaceutico",
-          name: "Productos farmaceuticos",
-          imageUrl: "/images/farmaceuticos.jpg",
-        },
-      ],
-    },
-    2023: {
-      imports: [],
-      exports: [
-        {
-          id: "mineral",
-          name: "Combustibles minerales, aceites minerales y productos de su destilación; sustancias bituminosas; minerales...",
-          imageUrl: "/images/combustible_mineral.avif",
-        },
-        {
-          id: "vehiculo",
-          name: "Vehículos distintos del material rodante ferroviario o tranviario, y sus partes y accesorios.",
-          imageUrl: "/images/vehiculo.jpg",
-        },
-        {
-          id: "plastico",
-          name: "Plásticos y sus manufacturas.",
-          imageUrl: "/images/plasticos.jpg",
-        },
-      ],
-    },
-    2024: {
-      imports: [],
-      exports: [
-        {
-          id: "mineral",
-          name: "Combustibles minerales, aceites minerales y productos de su destilación; sustancias bituminosas; minerales...",
-          imageUrl: "/images/combustible_mineral.avif",
-        },
-        {
-          id: "vehiculo",
-          name: "Vehículos distintos del material rodante ferroviario o tranviario, y sus partes y accesorios.",
-          imageUrl: "/images/vehiculo.jpg",
-        },
-        {
-          id: "plastico",
-          name: "Plásticos y sus manufacturas.",
-          imageUrl: "/images/plasticos.jpg",
-        },
-      ],
-    },
-  },
-  "colombia-brasil": {
-    2014: {
-      imports: [
-        {
-          id: "carne_br",
-          name: "Carne y despojos",
-          imageUrl: "/images/products/carne-brasil.png",
-        },
-      ],
-      exports: [
-        {
-          id: "relojes",
-          name: "Relojes",
-          imageUrl: "/images/products/relojes.png",
-        },
-      ],
-    },
-  },
-  "colombia-peru": {},
-  "colombia-panama": {},
-  "colombia-venezuela": {},
-  norte_santander_venezuela: {},
-};
-
 /* ---------------------- COMPONENTES UI REUTILIZABLES ---------------------- */
 
 interface CountryMapProps {
@@ -539,11 +258,10 @@ const CountrySummary = ({ selectedRow }: CountrySummaryProps) => {
       <Descriptions.Item label="Saldo comercial (texto)">
         <div className="saldo-row">
           <span className="saldo-text">
-            {selectedRow.saldo_comercial_millones || "Sin dato"} {" "}
+            {selectedRow.saldo_comercial_millones || "Sin dato"}{" "}
             {selectedRow.saldo_comercial_millones
               ?.toLowerCase()
               .includes("superávit") && <Tag color="green">Superávit</Tag>}
-
             {selectedRow.saldo_comercial_millones
               ?.toLowerCase()
               .includes("déficit") && <Tag color="red">Déficit</Tag>}
@@ -681,7 +399,7 @@ const ProductsTab = ({
   const configByYear = PRODUCT_IMAGES[countryKey] || {};
   const yearConfig = configByYear[selectedYear];
 
-  const renderGrid = (items?: ProductImage[], fallbackText?: string) => {
+  const renderGrid = (items?: any[], fallbackText?: string) => {
     if (!items || items.length === 0) {
       if (fallbackText) {
         return (
