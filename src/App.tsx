@@ -97,10 +97,11 @@ const COUNTRY_CONFIG: Record<
   },
   norte_santander_venezuela: {
     displayName: "Norte de Santander – Venezuela",
-    flagUrl: "https://flagcdn.com/w320/ve.png",
+    flagUrl: "/images/norte_santander.png",
     lat: 7.9,
     lng: -72.5,
-    note: "Relación comercial específica del departamento de Norte de Santander con Venezuela.",
+    note:
+      "Relación comercial específica del departamento de Norte de Santander con Venezuela.",
   },
 };
 
@@ -149,7 +150,7 @@ function buildChartData(rows: TradeRow[]): ChartPoint[] {
     .map((row) => {
       const imports = parseMoney(row.importaciones_millones);
       const exports = parseMoney(row.exportaciones_millones);
-      const balance = imports - exports;
+      const balance = exports - imports;
 
       return {
         year: row.año,
@@ -349,7 +350,7 @@ const TradeCharts = ({ data }: TradeChartsProps) => {
       <Divider />
 
       <Title level={5} style={{ marginBottom: 8 }}>
-        Saldo comercial (Importaciones - Exportaciones)
+        Saldo comercial (Exportaciones - Importaciones)
       </Title>
       <div style={{ width: "100%", height: 220 }}>
         <ResponsiveContainer>
@@ -371,7 +372,7 @@ const TradeCharts = ({ data }: TradeChartsProps) => {
             />
             <ReferenceLine y={0} stroke="#000" />
             <Legend />
-            <Bar dataKey="balance" name="Saldo (Imp - Exp)" fill="#ffc658" />
+            <Bar dataKey="balance" name="Saldo (Exp - Imp)" fill="#ffc658" />
           </BarChart>
         </ResponsiveContainer>
       </div>
